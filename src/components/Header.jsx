@@ -37,8 +37,8 @@ const Header = () => {
           </nav>
         </div>
         <div
-          className={`fixed w-72 shadow-lg z-10 h-full right-0 top-0 bg-white text-slate-900 p-5 overflow-auto ${
-            showCart ? "translate-x-0" : "translate-x-full"
+          className={`fixed w-72 z-10  h-full right-0 top-0 bg-white text-slate-900 p-5 overflow-auto shadow-2xl	 ${
+            showCart ? "translate-x-0 box-shadow " : "translate-x-full"
           } transition-all duration-300`}
         >
           <button

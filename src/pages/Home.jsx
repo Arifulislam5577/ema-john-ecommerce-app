@@ -6,7 +6,7 @@ const Home = () => {
   const products = useLoaderData();
 
   return (
-    <section className="home py-5">
+    <section className="home py-5 z-0">
       <div className="container">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
           {products.map((product) => (
