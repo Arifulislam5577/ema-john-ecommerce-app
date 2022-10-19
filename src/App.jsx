@@ -1,5 +1,6 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Loader from "./components/Loader";
 import Layout from "./Layout/Layout";
 import Cart from "./pages/Cart";
 import Home from "./pages/Home";
@@ -11,10 +12,10 @@ const App = () => {
     {
       path: "/",
       element: <Layout />,
+
       children: [
         {
           index: true,
-          loader: async () => fetchProducts(),
           element: <Home />,
         },
         { path: "cart", element: <Cart /> },
@@ -26,7 +27,7 @@ const App = () => {
       ],
     },
   ]);
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} fallbackElement={<Loader />} />;
 };
 
 export default App;

@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import React, { useContext, useState } from "react";
 import { BsCart3 } from "react-icons/bs";
 import { FaHome } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
+import auth from "../config/firbase";
+import { DataContext } from "../Context/Context";
 import CartItem from "./CartItem";
 
 const Header = () => {
+  const { totalItems, cart } = useContext(DataContext);
   const [showCart, setShowCart] = useState(false);
   const handleShowCart = () => {
     setShowCart((prev) => !prev);
   };
+  const provider = new GoogleAuthProvider();
 
+  const handleGoogleSignIn = () => {
+    signInWithPopup(auth, provider).then((response) => {
+      const user = response.user;
+      console.log(user);
+    });
+  };
   return (
     <header className="header bg-slate-900 py-5 ">
       <div className="container relative">
@@ -31,8 +42,11 @@ const Header = () => {
             <button className="flex text-white" onClick={handleShowCart}>
               <BsCart3 size="20" />
               <span className="text-xs bg-orange-500 p-1 ml-1 text-white">
-                12
+                {totalItems}
               </span>
+            </button>
+            <button className="text-white border py-1 px-4 text-xs">
+              Login
             </button>
           </nav>
         </div>
@@ -54,7 +68,9 @@ const Header = () => {
               </h2>
               <hr className="my-2 border " />
               <div className="my-3 flex flex-col gap-5">
-                <CartItem />
+                {cart.map((item) => (
+                  <CartItem key={item.id} {...item} />
+                ))}
               </div>
             </div>
             <div className="flex items-center justify-between">
